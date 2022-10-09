@@ -28,8 +28,21 @@ class DrivableMap {
      *       Return true if the Drivable was added to drivable_map.
      */
 
+    /**
+     * Adds the given Drivable object with the given id String to drivable_map, if the id was not used before.
+     *
+     * @param id The id to map the object to in the map, if it is not already a key being used.
+     * @param item The Drivable object being added to the map if id is not already a key.
+     * @return Boolean of whether item was added to drivable_map.
+     */
+    public boolean addDrivable(String id, Drivable item) {
+        if (! this.drivable_map.keySet().contains(id)) {
+            this.drivable_map.put(id, item);
+            return true;
+        }
 
-
+        return false;
+    }
 
     /* TODO: Write a method named hasFasterThan that takes an int (a speed)
      *       and returns true iff there is at least one item in drivable_map
@@ -38,8 +51,21 @@ class DrivableMap {
      * iterate through drivable_map.
      */
 
+    /**
+     * Returns whether there is an item in drivable_map with a maxSpeed at least the given speed.
+     *
+     * @param speed The minimum speed being searched for.
+     * @return Boolean of whether there is an item in drivable_map with maxSpeed at least the given speed.
+     */
+    public boolean hasFasterThan(int speed) {
+        for (Drivable item : this.drivable_map.values()) {
+            if (item.getMaxSpeed() >= speed) {
+                return true;
+            }
+        }
 
-
+        return false;
+    }
 
 
     /* TODO: Write a method named getTradable that takes no arguments and
@@ -47,7 +73,21 @@ class DrivableMap {
      *       drivable_map.
      */
 
+    /**
+     * Returns a list containing every Tradable item in drivable_map.
+     *
+     * @return A List object containing every Tradable item in drivable_map.
+     */
+    public List<Tradable> getTradable() {
+        ArrayList<Tradable> tradableList = new ArrayList<Tradable>();
 
+        for (Drivable item : this.drivable_map.values()) {
+            if (item instanceof Tradable) {
+                tradableList.add((Tradable) item);
+            }
+        }
 
+        return tradableList;
+    }
     
 }
